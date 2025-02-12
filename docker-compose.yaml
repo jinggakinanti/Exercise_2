@@ -1,0 +1,17 @@
+services:
+
+  mongo:
+    image: 'mongo:4.2.12'
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_DATABASE=showcase_image
+      - MONGO_INITDB_ROOT_USERNAME=showcase_image
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - 'mongo_data:/data/db'
+      - './mongo-init-local.js:/docker-entrypoint-initdb.d/mongo-init-local.js:ro'
+
+volumes:
+  mongo_data:
+    driver: local
