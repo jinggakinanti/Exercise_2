@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class ImageController {
     private final ImageService imageService;
 
@@ -52,7 +53,7 @@ public class ImageController {
         }
     }
     @PostMapping(value = "/image")
-    public ResponseEntity<BaseResponse<Image>> postImage(@RequestParam(required = false) String id, String url){
+    public ResponseEntity<BaseResponse<Image>> postImage(@RequestParam (required = false) String id, @RequestParam (required = false) String url){
         try{
             Image img = imageService.postImage(id, url);
             var responseBody = BaseResponse.<Image>builder().data(img)
