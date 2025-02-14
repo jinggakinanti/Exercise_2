@@ -9,5 +9,6 @@ public interface ImageService {
     Image getById (String id) throws Exception;
     Image postImage (String id, String url) throws Exception;
     void deleteImage () throws Exception;
+    void deleteById (String id) throws Exception;
 
 }

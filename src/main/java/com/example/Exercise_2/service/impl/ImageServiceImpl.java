@@ -53,4 +53,14 @@ public class ImageServiceImpl implements ImageService {
         }
         repo.deleteAll();
     }
+    @Override
+    public void deleteById(String id) throws Exception {
+        if(id == null){
+            throw new Exception("Please input image id");
+        }
+        else if(!repo.existsById(id)){
+            throw new Exception("No image with the given id");
+        }
+        repo.deleteById(id);
+    }
 }

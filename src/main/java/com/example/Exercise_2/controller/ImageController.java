@@ -70,13 +70,31 @@ public class ImageController {
             return ResponseEntity.badRequest().body(badResponseBody);
         }
     }
-    @DeleteMapping(value = "/image") //string
+    @DeleteMapping(value = "/image") 
     public ResponseEntity<BaseResponse<String>> deleteImage(){
         try{
             imageService.deleteImage();
             var responseBody = BaseResponse.<String>builder()
                     .status(HttpStatus.OK.name())
                     .message("Successfully deleted all images")
+                    .build();
+            return ResponseEntity.ok(responseBody);
+        }
+        catch (Exception e){
+            var badResponseBody = BaseResponse.<String>builder()
+                    .message(e.getMessage())
+                    .status(HttpStatus.BAD_REQUEST.name())
+                    .build();
+            return ResponseEntity.badRequest().body(badResponseBody);
+        }
+    }
+    @DeleteMapping(value = "/image/{id}")
+    public ResponseEntity<BaseResponse<String>> deleteImageById(@PathVariable String id){
+        try{
+            imageService.deleteById(id);
+            var responseBody = BaseResponse.<String>builder()
+                    .status(HttpStatus.OK.name())
+                    .message("Successfully deleted the image")
                     .build();
             return ResponseEntity.ok(responseBody);
         }
